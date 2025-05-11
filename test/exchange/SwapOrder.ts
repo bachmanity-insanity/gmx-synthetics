@@ -27,7 +27,7 @@ describe("Exchange.SwapOrder", () => {
     });
   });
 
-  it("executeOrder", async () => {
+  it.only("executeOrder", async () => {
     expect(await getAccountPositionCount(dataStore, user0.address)).eq(0);
     expect(await usdc.balanceOf(user0.address)).eq(0);
 

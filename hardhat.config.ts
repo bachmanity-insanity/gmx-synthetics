@@ -27,13 +27,13 @@ import { updateMarketConfig } from "./scripts/updateMarketConfigUtils";
 
 const getRpcUrl = (network) => {
   const defaultRpcs = {
-    arbitrum: "https://arb1.arbitrum.io/rpc",
+    arbitrum: "https://virtual.arbitrum.rpc.tenderly.co/d71b7272-3f11-409f-a637-dff5f08e9e74", // "https://arb1.arbitrum.io/rpc",
     avalanche: "https://api.avax.network/ext/bc/C/rpc",
     arbitrumGoerli: "https://goerli-rollup.arbitrum.io/rpc",
     arbitrumSepolia: "https://sepolia-rollup.arbitrum.io/rpc",
     avalancheFuji: "https://api.avax-test.network/ext/bc/C/rpc",
     snowtrace: "https://api.avax.network/ext/bc/C/rpc",
-    arbitrumBlockscout: "https://arb1.arbitrum.io/rpc",
+    arbitrumBlockscout: "https://virtual.arbitrum.rpc.tenderly.co/d71b7272-3f11-409f-a637-dff5f08e9e74", //"https://arb1.arbitrum.io/rpc",
   };
 
   let rpc = defaultRpcs[network];
@@ -118,10 +118,14 @@ const config: HardhatUserConfig = {
     hardhat: {
       saveDeployments: true,
       // allowUnlimitedContractSize: true,
-      // forking: {
-      //   url: `https://rpc.ankr.com/avalanche`,
-      //   blockNumber: 33963320,
-      // },
+      forking: {
+        url: `https://virtual.arbitrum.rpc.tenderly.co/4eb1f623-9522-4183-85c3-6cddd68cb93b`,
+        // blockNumber: 33963320,
+      },
+    },
+      arb: {
+      url: "https://virtual.arbitrum.rpc.tenderly.co/be06beda-af74-4457-8752-d10012ab2bb6",      // read from env
+      accounts: ["0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"],
     },
     localhost: {
       saveDeployments: true,

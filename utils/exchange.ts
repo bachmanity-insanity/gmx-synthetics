@@ -48,6 +48,14 @@ export function getExecuteParams(fixture, { tokens, prices }) {
 }
 
 export async function executeWithOracleParams(fixture, overrides) {
+  console.log("EXECUTE DEBUG - overrides:", JSON.stringify({
+    ...overrides,
+    execute: overrides.execute ? overrides.execute.toString().substring(0, 150) + "..." : undefined
+  }, null, 2));
+
+  // Debug: Log the stack trace to see caller
+  console.log("EXECUTE DEBUG - call stack:", new Error().stack);
+
   const {
     key,
     oracleBlocks,
@@ -64,6 +72,16 @@ export async function executeWithOracleParams(fixture, overrides) {
     dataStreamData,
     priceFeedTokens,
   } = overrides;
+
+  // Debug: Log more details about the execute function
+  console.log("EXECUTE DEBUG - function details:", {
+    functionExists: !!execute,
+    functionType: typeof execute,
+    functionToString: execute ? execute.toString().substring(0, 150) + "..." : undefined
+  });
+
+  
+
   const { provider } = ethers;
   const { signers } = fixture.accounts;
   const { oracleSalt, signerIndexes } = fixture.props;
@@ -139,6 +157,9 @@ export async function executeWithOracleParams(fixture, overrides) {
     }
   } else {
     oracleParams = await getOracleParams(args);
+    console.log("************************")
+    console.log("Key:== ", key)
+    console.log("Oracle Params:== ", oracleParams)
     return logGasUsage({
       tx: execute(key, oracleParams),
       label: gasUsageLabel,

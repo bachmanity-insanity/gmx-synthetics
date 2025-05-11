@@ -318,6 +318,8 @@ export async function getOracleParams({
     params.tokens.push(token);
     params.providers.push(gmOracleProvider.address);
     params.data.push(data);
+    console.log("signerInfo: ", signerInfo)
+    console.log("Data: ---->", data)
   }
 
   for (let i = 0; i < priceFeedTokens.length; i++) {

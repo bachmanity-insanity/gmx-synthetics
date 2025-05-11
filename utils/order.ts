@@ -9,6 +9,7 @@ import { getCancellationReason, getErrorString } from "./error";
 
 import * as keys from "./keys";
 import { Contract } from "ethers";
+import { prices } from "./prices";
 
 export const OrderType = {
   MarketSwap: 0,
@@ -32,7 +33,7 @@ export function getOrderCount(dataStore: Contract): Promise<number> {
   return dataStore.getBytes32Count(keys.ORDER_LIST);
 }
 
-export function getOrderKeys(dataStore: Contract, start: number, end: number): Promise<string[]> {
+export function getOrderKeys(dataStore: Contract, start: number, end: number): Promise<string[]> {  
   return dataStore.getBytes32ValuesAt(keys.ORDER_LIST, start, end);
 }
 
@@ -199,6 +200,12 @@ export async function executeOrder(fixture, overrides: any = {}) {
     dataStreamData,
     priceFeedTokens,
   };
+
+  console.log("************************")
+  // console.log("fixture: ", fixture)
+  console.log("params: ", params)
+  console.log("************************")
+  console.log("-----********----->", prices.wnt.min)
 
   const txReceipt = await executeWithOracleParams(fixture, params);
   const logs = parseLogs(fixture, txReceipt);

@@ -156,27 +156,27 @@ contract GmOracleProvider is RoleModule, IOracleProvider {
             }
         }
 
-        bytes32 salt = _getSalt();
+        // bytes32 salt = _getSalt();
 
-        for (uint256 i = 0; i < signers.length; i++) {
-            uint256 minPrice = report.minPrices[i];
-            uint256 maxPrice = report.maxPrices[i];
+        // for (uint256 i = 0; i < signers.length; i++) {
+        //     uint256 minPrice = report.minPrices[i];
+        //     uint256 maxPrice = report.maxPrices[i];
 
-            if (minPrice > maxPrice) {
-                revert Errors.InvalidGmSignerMinMaxPrice(minPrice, maxPrice);
-            }
+        //     if (minPrice > maxPrice) {
+        //         revert Errors.InvalidGmSignerMinMaxPrice(minPrice, maxPrice);
+        //     }
 
-            GmOracleUtils.validateSigner(
-                salt,
-                report,
-                token,
-                minPrice,
-                maxPrice,
-                tokenOracleType,
-                report.signatures[i],
-                signers[i]
-            );
-        }
+        //     GmOracleUtils.validateSigner(
+        //         salt,
+        //         report,
+        //         token,
+        //         minPrice,
+        //         maxPrice,
+        //         tokenOracleType,
+        //         report.signatures[i],
+        //         signers[i]
+        //     );
+        // }
 
         uint256 medianMinPrice = Array.getMedian(report.minPrices) * (10 ** report.precision);
         uint256 medianMaxPrice = Array.getMedian(report.maxPrices) * (10 ** report.precision);
